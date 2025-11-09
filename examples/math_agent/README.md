@@ -63,11 +63,26 @@ pip install -e ".[dev]"
 ```
 
 2. Set up your LLM API key:
+
+**Option A: OpenAI**
 ```bash
 export OPENAI_API_KEY="your-api-key-here"
-# Or for other providers:
-# export OPENROUTER_API_KEY="your-key"
-# export TOGETHER_API_KEY="your-key"
+```
+
+**Option B: AWS Bedrock** (See [AWS Bedrock Setup](#aws-bedrock-setup) below)
+```bash
+export AWS_ACCESS_KEY_ID="your-access-key"
+export AWS_SECRET_ACCESS_KEY="your-secret-key"
+export AWS_REGION_NAME="us-east-1"
+```
+
+**Option C: Other providers**
+```bash
+# OpenRouter
+export OPENROUTER_API_KEY="your-key"
+
+# Together AI
+export TOGETHER_API_KEY="your-key"
 ```
 
 ### Running the Math Agent
@@ -159,6 +174,71 @@ llm:
     - name: "openai/gpt-4o"
       weight: 0.2
 ```
+
+## AWS Bedrock Setup
+
+To use AWS Bedrock models (Claude, Titan, Llama, Mistral) instead of OpenAI:
+
+### Quick Start with Bedrock
+
+1. **Install LiteLLM** (OpenAI-compatible proxy for Bedrock):
+```bash
+pip install 'litellm[proxy]'
+```
+
+2. **Set AWS credentials**:
+```bash
+export AWS_ACCESS_KEY_ID="your-access-key"
+export AWS_SECRET_ACCESS_KEY="your-secret-key"
+export AWS_REGION_NAME="us-east-1"
+```
+
+3. **Run with Bedrock**:
+```bash
+cd examples/math_agent
+./run_bedrock.sh 100
+```
+
+This script automatically:
+- Starts LiteLLM proxy with Bedrock configuration
+- Uses Claude 3.5 Sonnet v2 + Haiku ensemble
+- Runs evolution with AWS Bedrock models
+
+### Manual Setup
+
+If you prefer manual control:
+
+1. **Start LiteLLM proxy**:
+```bash
+litellm --config litellm_bedrock.yaml
+```
+
+2. **Run evolution** (in another terminal):
+```bash
+python ../../openevolve-run.py \
+  initial_program.py \
+  evaluator.py \
+  --config config_bedrock.yaml \
+  --iterations 100
+```
+
+### Available Bedrock Models
+
+- **Claude 3.5 Sonnet v2**: `bedrock/anthropic.claude-3-5-sonnet-20241022-v2:0`
+- **Claude 3.5 Haiku**: `bedrock/anthropic.claude-3-5-haiku-20241022-v1:0`
+- **Claude 3 Opus**: `bedrock/anthropic.claude-3-opus-20240229-v1:0`
+- **Titan Text Premier**: `bedrock/amazon.titan-text-premier-v1:0`
+- **Llama 3.2 90B**: `bedrock/meta.llama3-2-90b-instruct-v1:0`
+- **Mistral Large**: `bedrock/mistral.mistral-large-2407-v1:0`
+
+See [AWS_BEDROCK.md](AWS_BEDROCK.md) for complete documentation.
+
+### Bedrock Costs
+
+Example for Claude 3.5 Sonnet v2 (us-east-1):
+- **Input**: $3.00 per million tokens
+- **Output**: $15.00 per million tokens
+- **500 iterations**: ~$3-10 total
 
 ## Visualization
 

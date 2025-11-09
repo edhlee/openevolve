@@ -1,0 +1,145 @@
+# Evolution settings for Math Agent - AWS Bedrock Version
+max_iterations: 500
+checkpoint_interval: 25
+parallel_evaluations: 4
+
+# LLM configuration for AWS Bedrock
+# IMPORTANT: This requires running LiteLLM proxy first!
+#
+# Setup:
+# 1. Install: pip install litellm[proxy]
+# 2. Set AWS credentials:
+#    export AWS_ACCESS_KEY_ID="your-key"
+#    export AWS_SECRET_ACCESS_KEY="your-secret"
+#    export AWS_REGION_NAME="us-east-1"
+# 3. Start proxy: litellm --config litellm_bedrock.yaml
+# 4. Run evolution: ./run.sh 500 --config config_bedrock.yaml
+#
+llm:
+  api_base: "http://localhost:4000"  # LiteLLM proxy endpoint
+  api_key: "dummy"  # Any value works with local LiteLLM proxy
+  models:
+    # Primary model: Claude 3.5 Sonnet v2 - Best for complex reasoning
+    - name: "bedrock/anthropic.claude-3-5-sonnet-20241022-v2:0"
+      weight: 0.7
+
+    # Secondary model: Claude 3.5 Haiku - Faster and cheaper for diversity
+    - name: "bedrock/anthropic.claude-3-5-haiku-20241022-v1:0"
+      weight: 0.3
+
+  temperature: 0.8
+  max_tokens: 8000
+  timeout: 180
+
+# Alternative model configurations (uncomment to use)
+
+# Option 2: Claude 3 Opus + Sonnet
+# llm:
+#   models:
+#     - name: "bedrock/anthropic.claude-3-opus-20240229-v1:0"
+#       weight: 0.6
+#     - name: "bedrock/anthropic.claude-3-sonnet-20240229-v1:0"
+#       weight: 0.4
+
+# Option 3: Meta Llama models (open source)
+# llm:
+#   models:
+#     - name: "bedrock/meta.llama3-2-90b-instruct-v1:0"
+#       weight: 0.8
+#     - name: "bedrock/meta.llama3-2-11b-instruct-v1:0"
+#       weight: 0.2
+
+# Option 4: Amazon Titan models
+# llm:
+#   models:
+#     - name: "bedrock/amazon.titan-text-premier-v1:0"
+#       weight: 1.0
+
+# Option 5: Mistral models
+# llm:
+#   models:
+#     - name: "bedrock/mistral.mistral-large-2407-v1:0"
+#       weight: 0.7
+#     - name: "bedrock/mistral.mistral-small-2402-v1:0"
+#       weight: 0.3
+
+# Database configuration (MAP-Elites algorithm)
+database:
+  population_size: 50
+  num_islands: 5
+  migration_interval: 50
+  feature_dimensions:
+    - "accuracy"
+    - "complexity"
+
+# Evaluation settings
+evaluator:
+  timeout: 60
+  max_retries: 3
+
+# Prompt configuration
+prompt:
+  system_message: |
+    SETTING:
+    You are an expert mathematician and algorithmic problem solver with deep expertise in:
+    - Algebraic manipulation and equation solving
+    - Calculus (derivatives, integrals, optimization)
+    - Number theory (GCD, LCM, divisibility, primes)
+    - Geometry and spatial reasoning
+    - Linear algebra (matrices, vectors, determinants)
+    - Combinatorics and discrete mathematics
+    - Trigonometry and periodic functions
+    - Statistics and probability
+    - Pattern recognition and sequences
+
+    TASK:
+    Your goal is to evolve a general-purpose math problem solver that can accurately solve diverse mathematical problems across multiple categories and difficulty levels.
+
+    PROBLEM CATEGORIES:
+    1. **Algebra**: Linear, quadratic, and polynomial equations
+    2. **Calculus**: Derivatives, integrals, limits, optimization
+    3. **Optimization**: Finding minima and maxima of functions
+    4. **Number Theory**: GCD, LCM, divisibility, modular arithmetic
+    5. **Geometry**: Areas, volumes, distances, angles
+    6. **Linear Algebra**: Matrix operations, determinants, eigenvalues
+    7. **Sequences**: Arithmetic and geometric progressions, series
+    8. **Trigonometry**: Sine, cosine, tangent, identities
+    9. **Statistics**: Mean, median, variance, standard deviation
+    10. **Combinatorics**: Permutations, combinations, counting
+
+    PERFORMANCE METRICS:
+    1. **accuracy**: Percentage of problems solved correctly (PRIMARY OBJECTIVE - maximize)
+    2. **combined_score**: Weighted score accounting for difficulty (easy=1x, medium=2x, hard=3x) - maximize
+    3. **category_accuracies**: Per-category performance breakdown
+    4. **difficulty_accuracies**: Per-difficulty performance breakdown
+    5. **avg_time_per_problem**: Average solving time (SECONDARY - minimize)
+    6. **complexity**: Code complexity metric (TERTIARY - balance between simplicity and capability)
+
+    TECHNICAL REQUIREMENTS:
+    - **Robustness**: Handle edge cases and malformed inputs gracefully
+    - **Accuracy**: Solutions must be within specified tolerance
+    - **Efficiency**: Avoid brute-force approaches when analytical solutions exist
+    - **Modularity**: Organize code into category-specific solvers
+    - **Parsing**: Extract relevant numbers and operations from natural language problem statements
+    - **Error Handling**: Return meaningful errors rather than crashing
+
+    STRATEGY GUIDANCE:
+    - Use analytical methods (closed-form solutions) when possible
+    - For numerical problems, use appropriate libraries (numpy, scipy) if needed
+    - Parse problem text carefully to extract numbers, operations, and requirements
+    - Pay attention to problem wording (e.g., "smallest root" vs "largest root")
+    - Validate solutions before returning them
+    - Consider symbolic computation for some problem types
+
+    EVOLUTION FOCUS:
+    - Start with simple pattern-matching and rule-based approaches
+    - Gradually add more sophisticated solving techniques
+    - Improve parsing and problem understanding
+    - Handle edge cases and ambiguous problem statements
+    - Balance between code complexity and solving capability
+
+  num_top_programs: 5
+  num_diverse_programs: 3
+
+# Logging
+log_level: "INFO"

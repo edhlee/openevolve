@@ -20,7 +20,11 @@ cat openevolve_output/checkpoints/checkpoint_100/best_program.py
 
 **Required:**
 - Python 3.10+
-- OpenAI API key (or OpenRouter, Together AI, etc.)
+- API key for one of:
+  - OpenAI
+  - AWS Bedrock
+  - OpenRouter
+  - Together AI
 
 **Install:**
 ```bash
@@ -29,14 +33,20 @@ pip install -e ".[dev]"
 
 **Set API Key:**
 ```bash
-# OpenAI
+# Option 1: OpenAI
 export OPENAI_API_KEY="sk-..."
 
-# Or OpenRouter
+# Option 2: AWS Bedrock (Claude, Titan, Llama, Mistral)
+export AWS_ACCESS_KEY_ID="your-access-key"
+export AWS_SECRET_ACCESS_KEY="your-secret-key"
+export AWS_REGION_NAME="us-east-1"
+# Then use: ./run_bedrock.sh 100
+
+# Option 3: OpenRouter
 export OPENROUTER_API_KEY="sk-..."
 # Then update config.yaml api_base to: "https://openrouter.ai/api/v1"
 
-# Or Together AI
+# Option 4: Together AI
 export TOGETHER_API_KEY="..."
 # Then update config.yaml api_base to: "https://api.together.xyz/v1"
 ```
