@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "category": "algebra",
+    "difficulty": "easy",
+    "problem": "Solve for x: 2x + 5 = 13",
+    "answer": 4.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 2,
+    "category": "algebra",
+    "difficulty": "medium",
+    "problem": "Solve the quadratic equation: x^2 - 5x + 6 = 0. Return the smaller root.",
+    "answer": 2.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 3,
+    "category": "algebra",
+    "difficulty": "medium",
+    "problem": "Solve for x: x^3 - 6x^2 + 11x - 6 = 0. Return the smallest positive root.",
+    "answer": 1.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 4,
+    "category": "calculus",
+    "difficulty": "medium",
+    "problem": "Find the derivative of f(x) = x^3 + 2x^2 - 5x + 1 at x = 2.",
+    "answer": 15.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 5,
+    "category": "calculus",
+    "difficulty": "hard",
+    "problem": "Find the definite integral of f(x) = x^2 from 0 to 3.",
+    "answer": 9.0,
+    "tolerance": 0.01
+  },
+  {
+    "id": 6,
+    "category": "optimization",
+    "difficulty": "medium",
+    "problem": "Find the minimum value of f(x) = (x - 3)^2 + 2 for x in [-10, 10].",
+    "answer": 2.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 7,
+    "category": "optimization",
+    "difficulty": "hard",
+    "problem": "Find the maximum value of f(x) = -2x^2 + 8x - 5 for x in [-10, 10].",
+    "answer": 3.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 8,
+    "category": "number_theory",
+    "difficulty": "easy",
+    "problem": "Find the greatest common divisor (GCD) of 48 and 18.",
+    "answer": 6.0,
+    "tolerance": 0
+  },
+  {
+    "id": 9,
+    "category": "number_theory",
+    "difficulty": "medium",
+    "problem": "Find the least common multiple (LCM) of 12 and 15.",
+    "answer": 60.0,
+    "tolerance": 0
+  },
+  {
+    "id": 10,
+    "category": "geometry",
+    "difficulty": "easy",
+    "problem": "Calculate the area of a circle with radius 5.",
+    "answer": 78.53981633974483,
+    "tolerance": 0.01
+  },
+  {
+    "id": 11,
+    "category": "geometry",
+    "difficulty": "medium",
+    "problem": "Calculate the volume of a sphere with radius 3.",
+    "answer": 113.09733552923255,
+    "tolerance": 0.01
+  },
+  {
+    "id": 12,
+    "category": "linear_algebra",
+    "difficulty": "medium",
+    "problem": "Find the determinant of the 2x2 matrix [[3, 5], [2, 4]].",
+    "answer": 2.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 13,
+    "category": "sequences",
+    "difficulty": "easy",
+    "problem": "Find the 10th term of the arithmetic sequence: 2, 5, 8, 11, ...",
+    "answer": 29.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 14,
+    "category": "sequences",
+    "difficulty": "medium",
+    "problem": "Find the sum of the first 10 terms of the geometric sequence: 1, 2, 4, 8, ...",
+    "answer": 1023.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 15,
+    "category": "trigonometry",
+    "difficulty": "medium",
+    "problem": "Find sin(pi/6) in decimal form.",
+    "answer": 0.5,
+    "tolerance": 0.001
+  },
+  {
+    "id": 16,
+    "category": "trigonometry",
+    "difficulty": "medium",
+    "problem": "Find cos(pi/3) in decimal form.",
+    "answer": 0.5,
+    "tolerance": 0.001
+  },
+  {
+    "id": 17,
+    "category": "statistics",
+    "difficulty": "easy",
+    "problem": "Find the mean of the numbers: 2, 4, 6, 8, 10.",
+    "answer": 6.0,
+    "tolerance": 0.001
+  },
+  {
+    "id": 18,
+    "category": "statistics",
+    "difficulty": "medium",
+    "problem": "Find the standard deviation of the numbers: 2, 4, 6, 8, 10.",
+    "answer": 2.8284271247461903,
+    "tolerance": 0.01
+  },
+  {
+    "id": 19,
+    "category": "combinatorics",
+    "difficulty": "medium",
+    "problem": "Calculate the number of ways to choose 3 items from 5 items (5 choose 3).",
+    "answer": 10.0,
+    "tolerance": 0
+  },
+  {
+    "id": 20,
+    "category": "combinatorics",
+    "difficulty": "hard",
+    "problem": "Calculate the number of permutations of 4 items chosen from 6 items.",
+    "answer": 360.0,
+    "tolerance": 0
+  }
+]
